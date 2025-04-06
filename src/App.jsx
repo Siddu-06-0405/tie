@@ -7,6 +7,7 @@ import BlogList from "./pages/BlogList";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
+import AdminPanel from "./pages/AdminPanel";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             element={<BlogSingle />}
           />
           <Route path="/admin-create" element={<AdminCreate />} />
+          <Route path="/admin-panel" element={<AdminPanel />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </main>
