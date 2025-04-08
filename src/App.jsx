@@ -2,8 +2,10 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import BlogSingle from "./pages/BlogSingle";
+// import BranchSingle from "./pages/BranchSingle";
 import AdminCreate from "./pages/AdminCreate";
 import BlogList from "./pages/BlogList";
+import BranchList from "./pages/BranchList";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -22,6 +24,10 @@ function App() {
           <Route
             path="/vtu-updates/articles-vtu-updates/:slug"
             element={<BlogSingle />}
+          />
+          <Route
+            path="/branch/:slug"
+            element={<BranchList />}
           />
           <Route path="/admin-create" element={<AdminCreate />} />
           <Route path="/admin-panel" element={<AdminPanel />} />

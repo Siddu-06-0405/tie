@@ -18,10 +18,10 @@ export const createBranch = async (req, res) => {
 
 // 2. ➕ Add a new Scheme to a Branch
 export const addSchemeToBranch = async (req, res) => {
-  const { branchName } = req.params;
+  const { branchSlug } = req.params;
   const { schemeName } = req.body;
   try {
-    const branch = await Branch.findOne({ name: branchName });
+    const branch = await Branch.findOne({ slug: branchSlug });
     if (!branch) return res.status(404).json({ message: "Branch not found" });
     const slug = schemeName.toLowerCase().replace(/\s+/g, "-").replace(/-+/g,'-');
     branch.Schemes.push({ name: schemeName,slug, subjects: [] });
@@ -34,11 +34,11 @@ export const addSchemeToBranch = async (req, res) => {
 
 // 3. ➕ Add a Subject to a Scheme in a Branch
 export const addSubjectToScheme = async (req, res) => {
-  const { branchName, schemeName } = req.params;
+  const { branchSlug, schemeSlug } = req.params;
   const { subjectName } = req.body;
   try {
-    const branch = await Branch.findOne({ name: branchName });
-    const scheme = branch?.Schemes.find(s => s.name === schemeName);
+    const branch = await Branch.findOne({ slug: branchSlug });
+    const scheme = branch?.Schemes.find(s => s.slug === schemeSlug);
     if (!scheme) return res.status(404).json({ message: "Scheme not found" });
 
     const slug = subjectName.toLowerCase().replace(/\s+/g, "-").replace(/-+/g,'-');
@@ -76,5 +76,34 @@ export const getAllBranches = async (req, res) => {
     res.json(branches);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch branches" });
+  }
+};
+
+export const getSchemesWithSubjects = async (req, res) => {
+  const { slug } = req.params;
+
+  try {
+    const branch = await Branch.findOne({ slug }, "name Schemes.name Schemes.slug Schemes.subjects.name Schemes.subjects.slug");
+
+    if (!branch) {
+      return res.status(404).json({ message: "Branch not found" });
+    }
+
+    const response = {
+      branchName: branch.name,
+      schemes: branch.Schemes.map((scheme) => ({
+        schemeName: scheme.name,
+        schemeSlug: scheme.slug,
+        subjects: scheme.subjects.map((subject) => ({
+          name: subject.name,
+          slug: subject.slug,
+        })),
+      })),
+    };
+
+    res.status(200).json(response);
+  } catch (error) {
+    console.error("Error fetching branch details:", error);
+    res.status(500).json({ message: "Server Error" });
   }
 };

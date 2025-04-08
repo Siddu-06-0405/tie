@@ -10,7 +10,9 @@ const BlogSingle = () => {
   useEffect(() => {
     axios
       .get(`http://localhost:5001/api/blogs/${slug}`)
-      .then((res) => setBlog(res.data));
+      .then((res) => {setBlog(res.data);
+        // console.log(res);
+      });
   }, [slug]);
 
   const getEmbedUrl = (url) => {
@@ -22,11 +24,11 @@ const BlogSingle = () => {
 
   return (
     <div className="p-4">
-      <p className="text-2xl font-bold mb-2">{blog.title}</p>
+      <p className="text-2xl font-bold mb-2 text-black">{blog.title}</p>
       <p className="text-sm text-gray-500 mb-4">
         classverse / {new Date(blog.createdAt).toDateString()} / ARTICLES
       </p>
-      <div className="mb-4 leading-relaxed whitespace-pre-line text-justify">
+      <div className="mb-4 leading-relaxed whitespace-pre-line text-justify text-black">
         {blog.description}
       </div>
       {getEmbedUrl(blog.pdfUrl) && (
