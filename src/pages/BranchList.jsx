@@ -35,13 +35,15 @@ const BranchList = () => {
 
             <div className="flex flex-wrap justify-center gap-4 mt-4">
               {scheme.subjects.map((subject) => (
-                <button
-                  key={subject.slug}
-                  className="px-4 py-2
-                  text-white rounded shadow"
-                >
-                  {subject.name}
-                </button>
+                <a href={`/categories/${slug}/${subject.slug}`}>
+                  <button
+                    key={subject.slug}
+                    className="px-4 py-2
+                    text-white rounded shadow"
+                  >
+                    {subject.name}
+                  </button>
+                </a>
               ))}
             </div>
           </div>

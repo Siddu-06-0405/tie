@@ -1,6 +1,6 @@
 import Branch from "../models/categories.model.js";
 
-// 1. ➕ Create a new Branch
+// 1. Create a new Branch
 export const createBranch = async (req, res) => {
   const { name } = req.body;
   try {
@@ -16,7 +16,7 @@ export const createBranch = async (req, res) => {
   }
 };
 
-// 2. ➕ Add a new Scheme to a Branch
+// 2. Add a new Scheme to a Branch
 export const addSchemeToBranch = async (req, res) => {
   const { branchSlug } = req.params;
   const { schemeName } = req.body;
@@ -32,7 +32,7 @@ export const addSchemeToBranch = async (req, res) => {
   }
 };
 
-// 3. ➕ Add a Subject to a Scheme in a Branch
+// 3. Add a Subject to a Scheme in a Branch
 export const addSubjectToScheme = async (req, res) => {
   const { branchSlug, schemeSlug } = req.params;
   const { subjectName } = req.body;
@@ -51,7 +51,7 @@ export const addSubjectToScheme = async (req, res) => {
   }
 };
 
-// 4. ➕ Add a Post to a Subject in a Scheme
+// 4. Add a Post to a Subject in a Scheme
 export const addPostToSubject = async (req, res) => {
   const { branchSlug, schemeSlug, subjectSlug } = req.params;
   const { title, pdfUrl } = req.body;
@@ -105,5 +105,109 @@ export const getSchemesWithSubjects = async (req, res) => {
   } catch (error) {
     console.error("Error fetching branch details:", error);
     res.status(500).json({ message: "Server Error" });
+  }
+};
+
+export const getSubjectWithPosts = async (req, res) => {
+  const { subjectSlug } = req.params;
+
+  try {
+    const result = await Branch.aggregate([
+      { $unwind: "$Schemes" },
+      { $unwind: "$Schemes.subjects" },
+      { $match: { "Schemes.subjects.slug": subjectSlug } },
+      {
+        $project: {
+          _id: 0,
+          branchSlug: "$slug",
+          subjectName: "$Schemes.subjects.name",
+          subjectSlug: "$Schemes.subjects.slug",
+          posts: {
+            $sortArray: {
+              input: "$Schemes.subjects.posts",
+              sortBy: { createdAt: -1 },
+            },
+          },
+        },
+      },
+    ]);
+
+    if (result.length === 0) {
+      return res.status(404).json({ message: "Subject not found" });
+    }
+
+    res.json(result[0]);
+  } catch (error) {
+    console.error("Error fetching subject:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+export const getSingleSubjectPost = async (req, res) => {
+  try {
+    const { slug } = req.params;
+
+    const branch = await Branch.findOne({
+      "Schemes.subjects.posts.slug": slug,
+    });
+
+    if (!branch) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    let foundPost = null;
+
+    // Traverse to locate the exact post object
+    for (const scheme of branch.Schemes) {
+      for (const subject of scheme.subjects) {
+        const post = subject.posts.find((p) => p.slug === slug);
+        if (post) {
+          foundPost = post;
+          break;
+        }
+      }
+      if (foundPost) break;
+    }
+
+    if (!foundPost) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    res.json(foundPost);
+  } catch (err) {
+    console.error("Error fetching single blog:", err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const getRecentPosts = async (req, res) => {
+  try {
+    const branches = await Branch.find();
+
+    let allPosts = [];
+
+    branches.forEach((branch) => {
+      branch.Schemes.forEach((scheme) => {
+        scheme.subjects.forEach((subject) => {
+          subject.posts.forEach((post) => {
+            allPosts.push({
+              subjectName: subject.name,
+              title: post.title,
+              slug: post.slug,
+              createdAt: post.createdAt,
+            });
+          });
+        });
+      });
+    });
+
+    // Sort posts by most recent first
+    allPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    res.json(allPosts);
+  } catch (err) {
+    console.error("Error fetching recent posts:", err);
+    res.status(500).json({ error: "Server error" });
   }
 };

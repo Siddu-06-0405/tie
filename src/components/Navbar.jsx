@@ -20,7 +20,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/recent-posts" className="hover:text-gray-400">
+            <Link to="/home/" className="hover:text-gray-400">
               Recent Posts
             </Link>
           </li>
