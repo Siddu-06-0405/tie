@@ -10,7 +10,7 @@ const Navbar = () => {
       {/* Top Navbar */}
       <nav className="bg-black text-white px-6 py-2 flex justify-between items-center">
         <div className="text-2xl font-bold">
-          <Link to="/">ClassVerse</Link>
+          <Link to="/">rvitm</Link>
         </div>
 
         <ul className="hidden md:flex space-x-6 text-sm font-medium">

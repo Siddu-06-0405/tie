@@ -10,9 +10,6 @@ const AdminPanel = () => {
   const [scheme, setScheme] = useState("");
   const [subject, setSubject] = useState("");
 
-  const [branchdup, setBranchdup] = useState("");
-  const [schemedup, setSchemedup] = useState("");
-  const [subjectdup, setSubjectdup] = useState("");
   const [post, setPost] = useState({ title: "", pdfUrl: "" });
 
   const [step, setStep] = useState(1);
@@ -44,14 +41,14 @@ const AdminPanel = () => {
 
   const handleBranchSubmit = async () => {
     await axios.post("http://localhost:5001/api/branch", { name: branch });
-    setStep(2);
+    window.location.reload();
   };
 
   const handleSchemeSubmit = async () => {
     await axios.post(`http://localhost:5001/api/branch/${branch}/scheme`, {
       schemeName: scheme,
     });
-    setStep(3);
+    window.location.reload();
   };
 
   const handleSubjectSubmit = async () => {
@@ -59,7 +56,7 @@ const AdminPanel = () => {
       `http://localhost:5001/api/branch/${branch}/scheme/${scheme}/subject`,
       { subjectName: subject }
     );
-    setStep(4);
+    window.location.reload();
   };
 
   const handlePostSubmit = async () => {
@@ -112,25 +109,20 @@ const AdminPanel = () => {
             </button>
           )}
 
-          {/* Create Branch section — hidden if branch is selected */}
-          {!branch && (
-            <>
-              <p>or</p>
-              <label className="block font-semibold">Create Branch</label>
-              <input
-                className="w-full border p-2 rounded text-white"
-                placeholder="e.g., CSE"
-                value={branch}
-                onChange={(e) => setBranch(e.target.value)}
-              />
-              <button
-                className="bg-black border border-white text-white px-4 py-2 rounded"
-                onClick={handleBranchSubmit}
-              >
-                Create Branch
-              </button>
-            </>
-          )}
+          <p>or</p>
+          <label className="block font-semibold">Create Branch</label>
+          <input
+            className="w-full border p-2 rounded text-white"
+            placeholder="e.g., CSE"
+            value={branch}
+            onChange={(e) => setBranch(e.target.value)}
+          />
+          <button
+            className="bg-black border border-white text-white px-4 py-2 rounded"
+            onClick={handleBranchSubmit}
+          >
+            Create Branch
+          </button>
         </div>
       )}
 
@@ -158,26 +150,22 @@ const AdminPanel = () => {
               Next
             </button>
           )}
-          {!scheme && (
-            <>
-              <p>or</p>
-              <label className="block font-semibold">
-                Add Scheme to Branch {branch}
-              </label>
-              <input
-                className="w-full border p-2 rounded text-white"
-                placeholder="e.g., 21Scheme"
-                value={scheme}
-                onChange={(e) => setScheme(e.target.value)}
-              />
-              <button
-                className="bg-blue-600 text-white px-4 py-2 rounded"
-                onClick={handleSchemeSubmit}
-              >
-                Add Scheme
-              </button>
-            </>
-          )}
+            <p>or</p>
+            <label className="block font-semibold">
+              Add Scheme to Branch {branch}
+            </label>
+            <input
+              className="w-full border p-2 rounded text-white"
+              placeholder="e.g., 21Scheme"
+              value={scheme}
+              onChange={(e) => setScheme(e.target.value)}
+            />
+            <button
+              className="bg-blue-600 text-white px-4 py-2 rounded"
+              onClick={handleSchemeSubmit}
+            >
+              Add Scheme
+            </button>
         </div>
       )}
 
@@ -205,26 +193,22 @@ const AdminPanel = () => {
               Next
             </button>
           )}
-          {!subject && (
-            <>
-              <p>or</p>
-              <label className="block font-semibold">
-                Add Subject to Scheme {scheme}
-              </label>
-              <input
-                className="w-full border p-2 rounded text-white"
-                placeholder="e.g., Engineering Chemistry"
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-              />
-              <button
-                className="bg-green-600 text-white px-4 py-2 rounded"
-                onClick={handleSubjectSubmit}
-              >
-                Add Subject
-              </button>
-            </>
-          )}
+            <p>or</p>
+            <label className="block font-semibold">
+              Add Subject to Scheme {scheme}
+            </label>
+            <input
+              className="w-full border p-2 rounded text-white"
+              placeholder="e.g., Engineering Chemistry"
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+            />
+            <button
+              className="bg-green-600 text-white px-4 py-2 rounded"
+              onClick={handleSubjectSubmit}
+            >
+              Add Subject
+            </button>
         </div>
       )}
 

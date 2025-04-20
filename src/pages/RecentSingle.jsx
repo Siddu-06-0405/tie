@@ -26,7 +26,7 @@ const SubjectSingle = () => {
     <div className="p-4">
       <p className="text-2xl font-bold mb-2 text-black">{blog.title}</p>
       <p className="text-sm text-gray-500 mb-4">
-        classverse / {new Date(blog.createdAt).toDateString()} / 
+        rvitm / {new Date(blog.createdAt).toDateString()} / 
       </p>
       <div className="mb-4 leading-relaxed whitespace-pre-line text-justify text-black">
         {blog.description}
