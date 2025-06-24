@@ -9,10 +9,18 @@
 <code>npm run dev</code>
 
 ## Create a .env file in the backend folder
-in .env
-PORT=5001
-NODE_ENV=development
-MONGO_DB_URI="your mongodb connection url"
+in .env <br>
+PORT=5001 <br>
+NODE_ENV=development <br>
+MONGO_DB_URI="your mongodb connection url" <br>
+<br>
+to run in production mode <br>
+in .env <br>
+<code>npm run build</code>
+PORT=5001 <br>
+NODE_ENV=production <br>
+MONGO_DB_URI="your mongodb connection url" <br>
+<code> cd backend && node server.js </code>
 
 <b>Now, open a new terminal and run the following command.</b>
 
