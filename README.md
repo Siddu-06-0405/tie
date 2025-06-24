@@ -10,6 +10,8 @@
 
 ## Create a .env file in the backend folder
 in .env
+PORT=5001
+NODE_ENV=development
 MONGO_DB_URI="your mongodb connection url"
 
 <b>Now, open a new terminal and run the following command.</b>
