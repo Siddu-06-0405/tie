@@ -26,7 +26,7 @@ const SubjectSingle = () => {
     <div className="p-4">
       <p className="text-2xl font-bold mb-2 text-black">{blog.title}</p>
       <p className="text-sm text-gray-500 mb-4">
-        rvitm / {new Date(blog.createdAt).toDateString()} / <a href={`/categories/${branchSlug}/${subjectSlug}`} className="text-amber-300">{subjectSlug}</a> / <a href={`/branch/${branchSlug}`} className="text-amber-300">{branchSlug}</a>
+        EasyTech / {new Date(blog.createdAt).toDateString()} / <a href={`/categories/${branchSlug}/${subjectSlug}`} className="text-amber-300">{subjectSlug}</a> / <a href={`/branch/${branchSlug}`} className="text-amber-300">{branchSlug}</a>
       </p>
       <div className="mb-4 leading-relaxed whitespace-pre-line text-justify text-black">
         {blog.description}

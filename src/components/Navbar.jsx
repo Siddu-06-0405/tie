@@ -10,15 +10,15 @@ const Navbar = () => {
       {/* Top Navbar */}
       <nav className="bg-black text-white px-6 py-2 flex justify-between items-center">
         <div className="text-2xl font-bold">
-          <Link to="/">rvitm</Link>
+          <Link to="/">EasyTech</Link>
         </div>
 
         <ul className="hidden md:flex space-x-6 text-sm font-medium">
-          <li>
+          {/* <li>
             <Link to="/calculator" className="hover:text-gray-400">
               SGPA/CGPA Calculator
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/home/" className="hover:text-gray-400">
               Recent Posts
@@ -30,16 +30,28 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
+            <Link to="/admin-panel">
+              Admin Upload
+            </Link>
+          </li>
+          {/* <li>
             <Link to="/internships" className="hover:text-gray-400">
               Internships/Workshops
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link
               to="/category/vtu-updates/articles-vtu-updates/"
               className="hover:text-gray-400"
             >
               Blog
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/admin-create"
+            >
+              Admin-Blog
             </Link>
           </li>
           <li>
@@ -78,11 +90,11 @@ const Navbar = () => {
           </button>
         </div>
         <ul className="space-y-4 text-2xl font-medium text-nowrap">
-          <li>
+          {/* <li>
             <Link to="/calculator" onClick={() => setSidebarOpen(false)}>
               SGPA/CGPA Calculator
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/recent-posts" onClick={() => setSidebarOpen(false)}>
               Recent Posts
@@ -94,16 +106,29 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
+            <Link to="/admin-panel" onClick={() => setSidebarOpen(false)}>
+              Admin Upload
+            </Link>
+          </li>
+          {/* <li>
             <Link to="/internships" onClick={() => setSidebarOpen(false)}>
               Internships/Workshops
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link
               to="/category/vtu-updates/articles-vtu-updates/"
               onClick={() => setSidebarOpen(false)}
             >
               Blog
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/admin-create"
+              onClick={() => setSidebarOpen(false)}
+            >
+              Admin-Blog
             </Link>
           </li>
           <li>

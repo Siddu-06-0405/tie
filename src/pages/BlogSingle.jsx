@@ -26,7 +26,7 @@ const BlogSingle = () => {
     <div className="p-4">
       <p className="text-2xl font-bold mb-2 text-black">{blog.title}</p>
       <p className="text-sm text-gray-500 mb-4">
-        rvitm / {new Date(blog.createdAt).toDateString()} / ARTICLES
+        EasyTech / {new Date(blog.createdAt).toDateString()} / ARTICLES
       </p>
       <div className="mb-4 leading-relaxed whitespace-pre-line text-justify text-black">
         {blog.description}

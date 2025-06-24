@@ -226,7 +226,7 @@ const AdminPanel = () => {
           />
           <input
             className="w-full border p-2 rounded text-white"
-            placeholder="PDF URL"
+            placeholder="Public Google Drive PDF URL"
             value={post.pdfUrl}
             onChange={(e) => setPost({ ...post, pdfUrl: e.target.value })}
           />

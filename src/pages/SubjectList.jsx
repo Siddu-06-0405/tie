@@ -62,7 +62,7 @@ const SubjectList = () => {
             </div>
 
             <div className="text-xs text-gray-500 mt-4 pt-2 border-t border-gray-700">
-              rvitm / {new Date(blog.createdAt).toDateString()}
+              EasyTech / {new Date(blog.createdAt).toDateString()}
             </div>
           </div>
         ))}

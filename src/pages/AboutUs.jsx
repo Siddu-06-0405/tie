@@ -6,7 +6,7 @@ const AboutUs = () => {
         <div>
           <h2 className="text-2xl font-bold mb-4">Who are we?</h2>
           <p>
-            CV, popularly known as rvitm by our fans on Instagram was
+            CV, popularly known as EasyTech by our fans on Instagram was
             kick-started as a portal for all-things VTU, including
             handwritten/printed notes collected and curated from the best
             lecturers around. CV also provides a huge databank of question
@@ -45,7 +45,7 @@ const AboutUs = () => {
           <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
           <p className="mb-2">
             We began our journey through Instagram where most of you know us and
-            this website, a new face for rvitm enables us to continue being
+            this website, a new face for EasyTech enables us to continue being
             your saviour for all things VTU!
           </p>
           <p>We’re here to hear you!</p>
